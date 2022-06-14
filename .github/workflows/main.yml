@@ -7,7 +7,10 @@ jobs:
   if_merged:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
     - run: |
         echo PR ${{ github.event.number }} was merged
         gh pr view ${{ github.event.number }}
+
