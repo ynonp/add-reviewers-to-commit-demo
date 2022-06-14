@@ -12,5 +12,5 @@ jobs:
     steps:
     - run: |
         echo PR ${{ github.event.number }} was merged
-        gh pr view ${{ github.event.number }}
+        gh pr view ${{ github.event.number }} --repo $GITHUB_REPOSITORY
 
