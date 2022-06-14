@@ -9,4 +9,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - run: |
-        echo The PR ${{ github.event.pull_request.id }} was merged
+        echo PR ${{ github.event.number }} was merged
+        gh pr view ${{ github.event.number }}
