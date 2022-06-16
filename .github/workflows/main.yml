@@ -1,16 +1,15 @@
 on:
-  pull_request:
-    types:
-      - closed
+  pull_request_review:
+    types: [submitted]
 
 jobs:
-  if_merged:
-    if: github.event.pull_request.merged == true
+  approved:
+    if: github.event.review.state == 'approved'
     runs-on: ubuntu-latest
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
     - run: |
-        echo PR ${{ github.event.number }} was merged
-        gh pr view ${{ github.event.number }} --repo $GITHUB_REPOSITORY
+        echo "Pull Request ${{ github.event.pull_request.number }} was approved by ${{ github.event.review.user.login }}"
+        # gh pr view ${{ github.event.number }} --repo $GITHUB_REPOSITORY
 
