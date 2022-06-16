@@ -9,7 +9,13 @@ jobs:
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
+    - uses: actions/checkout@v2
     - run: |
         echo "Pull Request ${{ github.event.pull_request.number }} was approved by ${{ github.event.review.user.login }}"
+        echo "Approved By: ${{github.event.review.user.login }}" | git notes append -F - ${{ github.event.pull_request.head.sha }}
+        git config --global user.name 'Github Action'
+        git config --global user.email '<>'
+
+        git push origin "refs/notes/*"
         # gh pr view ${{ github.event.number }} --repo $GITHUB_REPOSITORY
 
